@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="Helo" type="id" />
+    <item name="TruyenDeCu" type="id" />
+    <item name="HinhTruyen" type="id" />
+    <item name="tenTruyen" type="id" />
+    <item name="tenChap" type="id" />
+    <item name="recyclTruyenDeCu" type="id" />
+    <item name="recyclTruyenCapNhat" type="id" />
+    <item name="recyclTruyenFullHayNhat" type="id" />
+    <item name="tenTruyenChiTiet" type="id" />
+    <item name="theLoaiTruyenChiTiet" type="id" />
+    <item name="tinhTrangChiTietTruyen" type="id" />
+    <item name="tacGiaChiTietTruyen" type="id" />
+    <item name="nguonTruyenChiTiet" type="id" />
+    <item name="hinhTruyenChiTiet" type="id" />
+    <item name="moTaTruyenChiTiet" type="id" />
+    <item name="danhSachChapter" type="id" />
+    <item name="tenChapter" type="id" />
+    <item name="tenChapterChiTiet" type="id" />
+</resources>

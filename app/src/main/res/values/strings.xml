@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Light Novel</string>
+    <string name="tenTruyenChiTiet"> </string>
+    <string name="tacGiaTruyenChiTiet">Tác giả: </string>
+    <string name="nguonTruyenChiTiet">Nguồn: </string>
+    <string name="theLoaiTruyenChiTiet">Thể loại: </string>
+    <string name="tinhTrangTruyenChiTiet">Tình trạng: </string>
+</resources>
