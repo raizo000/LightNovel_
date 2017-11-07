@@ -48,6 +48,7 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                             textView {
                                 id = R.id.NoiDungTruyen
                                 textSize=sp(6).toFloat()
+                                textColor=resources.getColor(R.color.black)
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                             }.lparams(width = matchParent, height = matchParent) {
                                 padding = dip(10)
