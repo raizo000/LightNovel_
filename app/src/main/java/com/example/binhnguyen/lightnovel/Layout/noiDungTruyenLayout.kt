@@ -43,6 +43,9 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
 
 
                     nestedScrollView {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            background = ContextCompat.getDrawable(context, R.color.wheat)
+                        }
                         linearLayout {
                             orientation = LinearLayout.HORIZONTAL
                             textView {

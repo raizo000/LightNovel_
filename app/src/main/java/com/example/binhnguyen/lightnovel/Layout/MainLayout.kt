@@ -38,7 +38,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                             elevation = 2f
                         }
                         compoundDrawablePadding = dip(5)
-                        setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.ic_search_black_24dp), null, null, null)
+                        setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.seach), null, null, null)
                     }.lparams(width = matchParent, height = wrapContent, weight = 1f)
                     imageView {
                         imageResource = R.drawable.ic_reorder_black_24dp
