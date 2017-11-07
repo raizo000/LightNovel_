@@ -5,7 +5,6 @@ import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import com.example.binhnguyen.lightnovel.Activity.MainActivity
@@ -23,7 +22,7 @@ class MainLayout : AnkoComponent<MainActivity> {
         return with(ui) {
             linearLayout {
                 orientation = LinearLayout.VERTICAL
-             //   isFocusableInTouchMode = true
+                //   isFocusableInTouchMode = true
 
                 lparams(width = matchParent, height = matchParent) {}
 
@@ -51,11 +50,11 @@ class MainLayout : AnkoComponent<MainActivity> {
                         lparams(width = matchParent, height = matchParent)
                         orientation = LinearLayout.VERTICAL
                         textView {
-                            text = "Truyện đề cử"
+                            text = "Truyện đề cử  "
                             textSize = sp(9).toFloat()
                             typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             padding = dip(2)
-                        }.lparams() {
+                        }.lparams(width = matchParent) {
                             leftMargin = dip(5)
 
                         }

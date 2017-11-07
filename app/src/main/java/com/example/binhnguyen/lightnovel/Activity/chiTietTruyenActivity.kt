@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Html
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.binhnguyen.lightnovel.Adapter.AdapterChapter
@@ -65,6 +66,14 @@ class chiTietTruyenActivity : AppCompatActivity() {
             val nguonTruyen = thongtinTruyen[2].text()
             val tinhTrang = thongtinTruyen[3].select("span").text()
             val moTa = document.select("div[class=w3-justify summary] article")
+
+
+            val linkPaginationElement = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a")
+            var linkPagination = " "
+            for (value in linkPaginationElement) {
+                linkPagination += value.attr("href")+" "
+            }
+            Log.d("link", "$linkPagination ")
 
             val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
             for (value in chapterElement) {
