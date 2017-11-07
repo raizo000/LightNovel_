@@ -18,4 +18,6 @@
     <item name="danhSachChapter" type="id" />
     <item name="tenChapter" type="id" />
     <item name="tenChapterChiTiet" type="id" />
+    <item name="NoiDungTruyen" type="id" />
+    <item name="ngayDang" type="id" />
 </resources>

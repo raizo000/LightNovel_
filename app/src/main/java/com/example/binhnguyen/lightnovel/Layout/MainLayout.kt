@@ -23,6 +23,7 @@ class MainLayout : AnkoComponent<MainActivity> {
             linearLayout {
                 orientation = LinearLayout.VERTICAL
                 isFocusableInTouchMode = true
+
                 lparams(width = matchParent, height = matchParent) {}
                 // thanh tìm kiếm
                 linearLayout {

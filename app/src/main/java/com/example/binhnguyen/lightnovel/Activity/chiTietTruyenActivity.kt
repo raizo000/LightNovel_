@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Html
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.binhnguyen.lightnovel.Adapter.AdapterChapter
@@ -27,7 +26,9 @@ class chiTietTruyenActivity : AppCompatActivity() {
     var nguonTruyenChiTiet: TextView? = null
     var moTaTruyenChiTiet: TextView? = null
     var hinhTruyenChiTiet: ImageView? = null
+
     var listChapter = mutableListOf<ChapterModel>()
+
     var chapterRecyclerView: RecyclerView? = null
     var adapterChapter: AdapterChapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class chiTietTruyenActivity : AppCompatActivity() {
         chapterRecyclerView = find(R.id.danhSachChapter)
 
         adapterChapter = AdapterChapter(this, listChapter)
-        chapterRecyclerView?.adapter=adapterChapter
+        chapterRecyclerView?.adapter = adapterChapter
     }
 
     private fun getChitietTruyen(linkTruyen: String) {
@@ -65,12 +66,12 @@ class chiTietTruyenActivity : AppCompatActivity() {
             val tinhTrang = thongtinTruyen[3].select("span").text()
             val moTa = document.select("div[class=w3-justify summary] article")
 
-            val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li h4 a ")
+            val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
             for (value in chapterElement) {
-                val linkChapter = value.attr("href")
-                val tenChapter = value.attr("title")
-                Log.d("Mô tả", "$tenChapter")
-                val chapter = ChapterModel(tenChapter, linkChapter)
+                val linkChapter = value.select("h4 a").attr("href")
+                val tenChapter = value.select("h4 a").attr("title")
+                val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
+                val chapter = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
                 listChapter.add(chapter)
             }
 
@@ -81,6 +82,7 @@ class chiTietTruyenActivity : AppCompatActivity() {
                 theLoaiTruyenChiTiet?.text = "${resources.getString(R.string.theLoaiTruyenChiTiet)} $theLoai"
                 tinhTrangTruyenChiTiet?.text = "${resources.getString(R.string.tinhTrangTruyenChiTiet)} $tinhTrang"
                 nguonTruyenChiTiet?.text = "${resources.getString(R.string.nguonTruyenChiTiet)} $nguonTruyen"
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     moTaTruyenChiTiet?.text = Html.fromHtml(moTa.html(), 0)
                 } else {

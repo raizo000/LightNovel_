@@ -43,7 +43,7 @@ class ItemTruyenFullHayNhat : AnkoComponent<ViewGroup?> {
                             id = R.id.tenChap
                         }
                     }
-                }.lparams(width = dip(120), height = dip(200))
+                }.lparams(width = dip(130), height = dip(225))
             }
         }
     }

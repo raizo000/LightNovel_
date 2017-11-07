@@ -1,10 +1,12 @@
 package com.example.binhnguyen.lightnovel.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.binhnguyen.lightnovel.Activity.noiDungTruyenActivity
 import com.example.binhnguyen.lightnovel.Layout.itemChapter
 import com.example.binhnguyen.lightnovel.R
 import com.example.binhnguyen.textmanga.Model.ChapterModel
@@ -31,7 +33,14 @@ class AdapterChapter(var context: Context, var listChapter: MutableList<ChapterM
     class HolderChapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindingData(context: Context, chapterModel: ChapterModel) {
             val tencChap = itemView.find<TextView>(R.id.tenChapterChiTiet)
+            val ngayDang=itemView.find<TextView>(R.id.ngayDang)
             tencChap.text = chapterModel.tenChap
+            ngayDang.text=chapterModel.ngayDang
+            itemView.setOnClickListener {
+                val intent=Intent(context,noiDungTruyenActivity::class.java )
+                intent.putExtra("linkNoiDungTruyen",chapterModel.linkChap)
+                context.startActivity(intent)
+            }
         }
     }
 

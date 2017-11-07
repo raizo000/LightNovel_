@@ -33,22 +33,24 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                     verticalLayout {
                         view {
                             backgroundColor = ContextCompat.getColor(context, R.color.gray)
-                        }.lparams(width = matchParent, height = dip(2))
+                        }.lparams(width = matchParent, height = dip(2)) {
+                            bottomMargin = dip(10)
+                        }
                         linearLayout {
                             orientation = LinearLayout.HORIZONTAL
                             // hình truyện
                             imageView {
                                 id = R.id.hinhTruyenChiTiet
                                 scaleType = ImageView.ScaleType.FIT_END
-                            }.lparams(width = dip(90), height = dip(120), weight = 1f){
-                                leftMargin=dip(10)
+                            }.lparams(width = dip(90), height = dip(120), weight = 1f) {
+                                leftMargin = dip(10)
                             }
                             // thông tin truyện
                             verticalLayout {
                                 textView {
                                     textResource = R.string.tenTruyenChiTiet
                                     maxLines = 1
-                                    typeface = Typeface.DEFAULT_BOLD
+                                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Black.ttf")
                                     textSize = 20f
                                     ellipsize = TextUtils.TruncateAt.END
                                     id = R.id.tenTruyenChiTiet
@@ -58,7 +60,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                                 textView {
                                     textResource = R.string.tacGiaTruyenChiTiet
                                     maxLines = 1
-                                    typeface = Typeface.DEFAULT_BOLD
+                                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                                     ellipsize = TextUtils.TruncateAt.END
                                     id = R.id.tacGiaChiTietTruyen
                                 }.lparams {
@@ -68,7 +70,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                                 textView {
                                     textResource = R.string.theLoaiTruyenChiTiet
                                     maxLines = 1
-                                    typeface = Typeface.DEFAULT_BOLD
+                                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                                     ellipsize = TextUtils.TruncateAt.END
                                     id = R.id.theLoaiTruyenChiTiet
                                 }.lparams {
@@ -78,7 +80,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                                     textResource = R.string.tinhTrangTruyenChiTiet
                                     ellipsize = TextUtils.TruncateAt.END
                                     maxLines = 1
-                                    typeface = Typeface.DEFAULT_BOLD
+                                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                                     id = R.id.tinhTrangChiTietTruyen
                                 }.lparams {
                                     bottomMargin = dip(5)
@@ -100,7 +102,10 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                         // thanh ngang
                         view {
                             backgroundColor = ContextCompat.getColor(context, R.color.gray)
-                        }.lparams(width = matchParent, height = dip(2))
+                        }.lparams(width = matchParent, height = dip(2)) {
+                            topMargin = dip(8)
+                            bottomMargin = dip(4)
+                        }
                         //
                         // Mô tả truyện
                         verticalLayout {
@@ -108,7 +113,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                             textView {
                                 textSize = dip(5).toFloat()
                                 text = "Mô tả:"
-                                typeface = Typeface.DEFAULT_BOLD
+                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
 
                             }
                             linearLayout {
@@ -129,7 +134,9 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                         // thanh ngang
                         view {
                             backgroundColor = ContextCompat.getColor(context, R.color.gray)
-                        }.lparams(width = matchParent, height = dip(2))
+                        }.lparams(width = matchParent, height = dip(2)) {
+                            topMargin = dip(10)
+                        }
 
                         //
                         // Danh sách chapter
@@ -137,7 +144,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                             textView {
                                 text = "Danh sách chapter"
                                 textSize = sp(5).toFloat()
-                                typeface = Typeface.DEFAULT_BOLD
+                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             }
                             recyclerView {
                                 id = R.id.danhSachChapter

@@ -1,6 +1,8 @@
 package com.example.binhnguyen.lightnovel.Layout
 
 import android.graphics.Typeface
+import android.support.v4.content.ContextCompat
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -14,16 +16,29 @@ class itemChapter : AnkoComponent<ViewGroup?> {
 
     override fun createView(ui: AnkoContext<ViewGroup?>): View {
         return with(ui) {
-            frameLayout {
-                linearLayout {
-                    orientation = LinearLayout.HORIZONTAL
-                    lparams(width = matchParent, height = wrapContent)
-                    textView {
-                        id = R.id.tenChapterChiTiet
-                        textSize = dip(4).toFloat()
 
-                    }.lparams(width = matchParent, height = wrapContent)
+            linearLayout {
+                orientation = LinearLayout.HORIZONTAL
+                lparams(width = matchParent, height = wrapContent)
+
+                textView {
+                    id = R.id.tenChapterChiTiet
+                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Medium.ttf")
+                    textSize = dip(4).toFloat()
+
+                }.lparams(width = dip(200), height = dip(20), weight = 1f){
+                    padding=dip(5)
                 }
+                textView {
+                    id = R.id.ngayDang
+                    //  typeface = Typeface.createFromAsset(context.assets, "Roboto-Medium.ttf")
+                    textSize = dip(4).toFloat()
+                    gravity = Gravity.RIGHT
+
+                }.lparams(dip(200), height = dip(20), weight = 1f){
+                    padding=dip(5)
+                }
+
             }
         }
     }

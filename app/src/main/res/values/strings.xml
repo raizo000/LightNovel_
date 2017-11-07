@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Light Novel</string>
+    <string name="app_name">Ngôn tình truyện</string>
     <string name="tenTruyenChiTiet"> </string>
     <string name="tacGiaTruyenChiTiet">Tác giả: </string>
     <string name="nguonTruyenChiTiet">Nguồn: </string>
