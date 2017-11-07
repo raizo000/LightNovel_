@@ -1,9 +1,8 @@
 package com.example.binhnguyen.lightnovel.Activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.example.binhnguyen.lightnovel.R
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenDecu
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenFullHayNhat

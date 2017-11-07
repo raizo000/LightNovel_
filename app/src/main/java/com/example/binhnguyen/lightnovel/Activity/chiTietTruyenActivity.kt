@@ -69,7 +69,7 @@ class chiTietTruyenActivity : AppCompatActivity() {
             val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
             for (value in chapterElement) {
                 val linkChapter = value.select("h4 a").attr("href")
-                val tenChapter = value.select("h4 a").attr("title")
+                val tenChapter = value.select("h4 a").text()
                 val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
                 val chapter = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
                 listChapter.add(chapter)

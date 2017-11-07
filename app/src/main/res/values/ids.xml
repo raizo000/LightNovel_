@@ -20,4 +20,5 @@
     <item name="tenChapterChiTiet" type="id" />
     <item name="NoiDungTruyen" type="id" />
     <item name="ngayDang" type="id" />
+    <item name="toolBarText" type="id" />
 </resources>

@@ -148,6 +148,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                             }
                             recyclerView {
                                 id = R.id.danhSachChapter
+                                isNestedScrollingEnabled = false
                                 layoutManager = LinearLayoutManager(context)
                             }.lparams {
                                 padding = dip(10)

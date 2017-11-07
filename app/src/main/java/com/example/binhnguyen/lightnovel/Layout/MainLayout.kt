@@ -5,6 +5,7 @@ import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import com.example.binhnguyen.lightnovel.Activity.MainActivity
@@ -22,9 +23,10 @@ class MainLayout : AnkoComponent<MainActivity> {
         return with(ui) {
             linearLayout {
                 orientation = LinearLayout.VERTICAL
-                isFocusableInTouchMode = true
+             //   isFocusableInTouchMode = true
 
                 lparams(width = matchParent, height = matchParent) {}
+
                 // thanh tìm kiếm
                 linearLayout {
                     orientation = LinearLayout.HORIZONTAL
@@ -45,14 +47,13 @@ class MainLayout : AnkoComponent<MainActivity> {
                 }
 
                 nestedScrollView {
-
                     linearLayout {
                         lparams(width = matchParent, height = matchParent)
                         orientation = LinearLayout.VERTICAL
                         textView {
                             text = "Truyện đề cử"
                             textSize = sp(9).toFloat()
-                            typeface = Typeface.DEFAULT_BOLD
+                            typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             padding = dip(2)
                         }.lparams() {
                             leftMargin = dip(5)
@@ -60,12 +61,13 @@ class MainLayout : AnkoComponent<MainActivity> {
                         }
                         recyclerView {
                             id = R.id.recyclTruyenDeCu
+                            isNestedScrollingEnabled = false
                             layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
                         }
                         textView {
                             text = "Truyện mới cập nhật "
                             textSize = sp(9).toFloat()
-                            typeface = Typeface.DEFAULT_BOLD
+                            typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             padding = dip(2)
 
                         }.lparams() {
@@ -73,6 +75,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                         }
                         recyclerView {
                             id = R.id.recyclTruyenCapNhat
+                            isNestedScrollingEnabled = false
                             layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
 
                         }
@@ -80,7 +83,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                         textView {
                             text = "Truyện Full hay nhất "
                             textSize = sp(9).toFloat()
-                            typeface = Typeface.DEFAULT_BOLD
+                            typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             padding = dip(2)
 
                         }.lparams() {
@@ -88,6 +91,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                         }
                         recyclerView {
                             id = R.id.recyclTruyenFullHayNhat
+                            isNestedScrollingEnabled = false
                             layoutManager = GridLayoutManager(context, 3)
 
                         }

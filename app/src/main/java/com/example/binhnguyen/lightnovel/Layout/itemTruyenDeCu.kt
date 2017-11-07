@@ -34,7 +34,7 @@ class itemTruyenDeCu : AnkoComponent<ViewGroup?> {
                             id = R.id.HinhTruyen
                             scaleType = ImageView.ScaleType.FIT_XY
                         }.lparams(width = dip(100), height = dip(150)) {
-                            leftMargin=dip(10)
+                            leftMargin=dip(16)
                             topMargin=dip(4)
                         }
                         textView {
