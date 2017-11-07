@@ -60,7 +60,7 @@ class chiTietTruyenActivity : AppCompatActivity() {
             val theLoaiElement = thongtinTruyen[1].select("a")
             var theLoai = ""
             for (value in theLoaiElement) {
-                theLoai += value.attr("title") + " "
+                theLoai += value.attr("title") + ", "
             }
             val nguonTruyen = thongtinTruyen[2].text()
             val tinhTrang = thongtinTruyen[3].select("span").text()

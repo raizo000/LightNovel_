@@ -143,7 +143,7 @@ class chiTietTruyenLayout : AnkoComponent<chiTietTruyenActivity> {
                         verticalLayout {
                             textView {
                                 text = "Danh sách chapter"
-                                textSize = sp(5).toFloat()
+                                textSize = sp(6).toFloat()
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             }
                             recyclerView {

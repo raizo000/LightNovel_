@@ -25,18 +25,17 @@ class itemChapter : AnkoComponent<ViewGroup?> {
                     id = R.id.tenChapterChiTiet
                     typeface = Typeface.createFromAsset(context.assets, "Roboto-Medium.ttf")
                     textSize = dip(4).toFloat()
-
                 }.lparams(width = dip(200), height = dip(20), weight = 1f){
-                    padding=dip(5)
+                    padding=dip(4)
                 }
                 textView {
                     id = R.id.ngayDang
-                    //  typeface = Typeface.createFromAsset(context.assets, "Roboto-Medium.ttf")
+                      typeface = Typeface.createFromAsset(context.assets, "Roboto-Light.ttf")
                     textSize = dip(4).toFloat()
                     gravity = Gravity.RIGHT
 
                 }.lparams(dip(200), height = dip(20), weight = 1f){
-                    padding=dip(5)
+                    padding=dip(4)
                 }
 
             }

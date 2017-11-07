@@ -29,13 +29,14 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                             id = R.id.toolBarText
                             typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                             textColor = resources.getColor(R.color.white)
-                        }.lparams(width = matchParent, height = dip(30)) {
-                            topMargin = dip(22)
+
+                        }.lparams(width = matchParent) {
+                            topMargin = dip(10)
                         }
+
                     }
                 }.lparams(width = matchParent) {
                 }
-
 
                 linearLayout {
                     lparams(width = matchParent, height = matchParent)
@@ -46,9 +47,11 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                             orientation = LinearLayout.HORIZONTAL
                             textView {
                                 id = R.id.NoiDungTruyen
+                                textSize=sp(6).toFloat()
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                             }.lparams(width = matchParent, height = matchParent) {
                                 padding = dip(10)
+                                topMargin = dip(50)
                             }
                         }
                     }
