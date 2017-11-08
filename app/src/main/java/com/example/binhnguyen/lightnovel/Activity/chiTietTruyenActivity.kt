@@ -37,7 +37,7 @@ class chiTietTruyenActivity : AppCompatActivity() {
         chiTietTruyenLayout().setContentView(this)
         val linkTruyen = intent.getStringExtra("linkTruyen")
         getChitietTruyen(linkTruyen)
-
+        getAllChapter(linkTruyen)
         tacGiaTruyenChiTiet = find(R.id.tacGiaChiTietTruyen)
         tenTruyenTruyenChiTiet = find(R.id.tenTruyenChiTiet)
         theLoaiTruyenChiTiet = find(R.id.theLoaiTruyenChiTiet)
@@ -68,13 +68,6 @@ class chiTietTruyenActivity : AppCompatActivity() {
             val moTa = document.select("div[class=w3-justify summary] article")
 
 
-            val linkPaginationElement = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a")
-            var linkPagination = " "
-            for (value in linkPaginationElement) {
-                linkPagination += value.attr("href")+" "
-            }
-            Log.d("link", "$linkPagination ")
-
             val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
             for (value in chapterElement) {
                 val linkChapter = value.select("h4 a").attr("href")
@@ -102,4 +95,37 @@ class chiTietTruyenActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getAllChapter(linkTruyen: String): MutableList<ChapterModel> {
+        var list = mutableListOf<ChapterModel>()
+        var listLink = mutableListOf<String>()
+        doAsync {
+            val document = Jsoup.connect(linkTruyen).get()
+            val linkPaginationElement = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a[class=last]").attr("href")
+            if (linkPaginationElement.equals("")) {
+                val LINK = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a")
+
+                for (value in LINK) {
+                    listLink.add(value.attr("href"))
+                }
+                Log.d("link 1", "$listLink ")
+            } else {
+                Log.d("link 2", "$linkPaginationElement ")
+            }
+            for (values in listLink) {
+                val document = Jsoup.connect("${values.toString()}").get()
+                val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
+                for (value in chapterElement) {
+                    val linkChapter = value.select("h4 a").attr("href")
+                    val tenChapter = value.select("h4 a").text()
+                    val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
+                    val chapter = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
+                    list.add(chapter)
+                }
+                Log.d("list Link", "$values ")
+            }
+        }
+        return list
+    }
+
 }
