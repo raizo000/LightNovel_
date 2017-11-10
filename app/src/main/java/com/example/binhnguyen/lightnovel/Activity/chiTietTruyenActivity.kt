@@ -52,6 +52,8 @@ class chiTietTruyenActivity : AppCompatActivity() {
     }
 
     private fun getChitietTruyen(linkTruyen: String) {
+        val listLink = arrayListOf<String>()
+        val tempList2 = mutableListOf<ChapterModel>()
         doAsync {
             val document = Jsoup.connect(linkTruyen).get()
             val tenTruyen = document.select("div[class=w3-col m8 l8 w3-container w3-center detail-right] h1 a").text()
@@ -67,15 +69,44 @@ class chiTietTruyenActivity : AppCompatActivity() {
             val tinhTrang = thongtinTruyen[3].select("span").text()
             val moTa = document.select("div[class=w3-justify summary] article")
 
-
             val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
+            val tempList = mutableListOf<ChapterModel>()
             for (value in chapterElement) {
                 val linkChapter = value.select("h4 a").attr("href")
                 val tenChapter = value.select("h4 a").text()
                 val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
                 val chapter = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
-                listChapter.add(chapter)
+                tempList.add(chapter)
             }
+            listChapter.addAll(tempList)
+
+            val linkPaginationElement = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a[class=last]").attr("href")
+            if (linkPaginationElement.equals("")) {
+                val LINK = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a ")
+                for (value in LINK) {
+                    val linkChapter: String = value.attr("href")
+                    if (!linkChapter.isEmpty()) {
+                        listLink.add(value.select("a").attr("href"))
+                    }
+                }
+
+            }
+
+            if (!listLink.isEmpty()) {
+                for (values in listLink) {
+                    val document2 = Jsoup.connect("${values}").get()
+                    val chapterElement2 = document2.select("div[id=divtab] ul[class=w3-ul] li  h4")
+                    for (value in chapterElement2) {
+                        val linkChapter = value.select("a").attr("href")
+                        val tenChapter = value.select("a").text()
+                        val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
+                        val chapter2 = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
+                        tempList2.add(chapter2)
+                    }
+                    listChapter.addAll(tempList2)
+                }
+            }
+
 
             uiThread {
                 Picasso.with(applicationContext).load(hinhTruyen).into(hinhTruyenChiTiet)
@@ -97,32 +128,41 @@ class chiTietTruyenActivity : AppCompatActivity() {
     }
 
     private fun getAllChapter(linkTruyen: String): MutableList<ChapterModel> {
+        val tempList = mutableListOf<ChapterModel>()
         var list = mutableListOf<ChapterModel>()
-        var listLink = mutableListOf<String>()
+        val listLink = arrayListOf<String>()
+        var listChapter = mutableListOf<ChapterModel>()
+
         doAsync {
             val document = Jsoup.connect(linkTruyen).get()
             val linkPaginationElement = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a[class=last]").attr("href")
+            //    Log.d("pageMax", "${linkPaginationElement}")
             if (linkPaginationElement.equals("")) {
-                val LINK = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a")
-
+                val LINK = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a ")
                 for (value in LINK) {
-                    listLink.add(value.attr("href"))
+                    val linkChapter: String = value.attr("href")
+                    if (!linkChapter.isEmpty()) {
+                        listLink.add(value.select("a").attr("href"))
+                    }
                 }
-                Log.d("link 1", "$listLink ")
-            } else {
-                Log.d("link 2", "$linkPaginationElement ")
+
             }
-            for (values in listLink) {
-                val document = Jsoup.connect("${values.toString()}").get()
-                val chapterElement = document.select("div[id=divtab] ul[class=w3-ul] li  ")
-                for (value in chapterElement) {
-                    val linkChapter = value.select("h4 a").attr("href")
-                    val tenChapter = value.select("h4 a").text()
-                    val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
-                    val chapter = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
-                    list.add(chapter)
+            Log.w("List link", "$listLink")
+            if (!listLink.isEmpty()) {
+                for (values in listLink) {
+                    Log.d("ten link", "$values")
+                    val document2 = Jsoup.connect("${values}").get()
+                    val chapterElement = document2.select("div[id=divtab] ul[class=w3-ul] li  ")
+                    tempList.clear()
+                    for (value in chapterElement) {
+                        val linkChapter = value.select("h4 a").attr("href")
+                        val tenChapter = value.select("h4 a").text()
+                        val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
+                        val chapter = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
+                        tempList.add(chapter)
+                    }
+                    list.addAll(tempList)
                 }
-                Log.d("list Link", "$values ")
             }
         }
         return list
