@@ -93,10 +93,10 @@ class chiTietTruyenActivity : AppCompatActivity() {
                 for (values in listLink) {
                     val document2 = Jsoup.connect("${values}").get()
                     tempList2.clear()
-                    val chapterElement2 = document2.select("div[id=divtab] ul[class=w3-ul] li  h4")
+                    val chapterElement2 = document2.select("div[id=divtab] ul[class=w3-ul] li ")
                     for (value in chapterElement2) {
-                        val linkChapter = value.select("a").attr("href")
-                        val tenChapter = value.select("a").text()
+                        val linkChapter = value.select(" h4 a").attr("href")
+                        val tenChapter = value.select("h4 a").text()
                         val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
                         val chapter2 = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
                         tempList2.add(chapter2)
