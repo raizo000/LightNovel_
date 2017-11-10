@@ -21,7 +21,7 @@ import org.jetbrains.anko.find
 class AdapterTruyenFullHayNhat(var context: Context, var listTruyen: MutableList<TruyenModel>) : RecyclerView.Adapter<AdapterTruyenFullHayNhat.HolderTruyenFullHayNhat>() {
 
     override fun onBindViewHolder(holder: HolderTruyenFullHayNhat?, position: Int) {
-        holder?.bindingData(context, listTruyen.get(position))
+        holder?.bindingData(context, listTruyen[position],position)
     }
 
     override fun getItemCount(): Int {
@@ -34,13 +34,15 @@ class AdapterTruyenFullHayNhat(var context: Context, var listTruyen: MutableList
     }
 
     class HolderTruyenFullHayNhat(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindingData(context: Context, truyenModel: TruyenModel) {
+        fun bindingData(context: Context, truyenModel: TruyenModel, position: Int) {
             val tenTruyen = itemView.find<TextView>(R.id.tenTruyen)
-            tenTruyen.text = truyenModel.trenTruyen
+            tenTruyen.text = truyenModel.tenTruyen
             val tenChap = itemView.find<TextView>(R.id.tenChap)
             tenChap.text = truyenModel.listChap[0].tenChap
+
             val hinh=itemView.find<ImageView>(R.id.HinhTruyen)
             Picasso.with(context).load(truyenModel.linkHinhTruyen).into(hinh)
+
             itemView.setOnClickListener {
                 val intent = Intent(context, chiTietTruyenActivity::class.java)
                 intent.putExtra("linkTruyen",truyenModel.linkTruyen)
