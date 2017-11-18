@@ -7,4 +7,5 @@
     <color name="gray">#ccc</color>
     <color name="black">#000</color>
     <color name="wheat">#fefbf7</color>
+    <color name="transparent">#00555555 </color>
 </resources>

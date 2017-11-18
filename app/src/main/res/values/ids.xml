@@ -22,4 +22,8 @@
     <item name="ngayDang" type="id" />
     <item name="toolBarText" type="id" />
     <item name="toolBarChapter" type="id" />
+    <item name="Pre" type="id" />
+    <item name="Next" type="id" />
+    <item name="PreButton" type="id" />
+    <item name="NextButton" type="id" />
 </resources>

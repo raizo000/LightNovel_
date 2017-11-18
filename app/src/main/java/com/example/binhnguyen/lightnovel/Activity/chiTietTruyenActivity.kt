@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Html
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.binhnguyen.lightnovel.Adapter.AdapterChapter
@@ -92,6 +93,28 @@ class chiTietTruyenActivity : AppCompatActivity() {
             if (!listLink.isEmpty()) {
                 for (values in listLink) {
                     val document2 = Jsoup.connect("${values}").get()
+                    tempList2.clear()
+                    val chapterElement2 = document2.select("div[id=divtab] ul[class=w3-ul] li ")
+                    for (value in chapterElement2) {
+                        val linkChapter = value.select(" h4 a").attr("href")
+                        val tenChapter = value.select("h4 a").text()
+                        val ngayCapNhat = value.select("span[class=w3-right w3-hide-small]").text()
+                        val chapter2 = ChapterModel(tenChapter, linkChapter, ngayCapNhat)
+                        tempList2.add(chapter2)
+                    }
+                    listChapter.addAll(tempList2)
+                }
+            }
+            if(!linkPaginationElement.isEmpty()) {
+                val pageMax = linkPaginationElement.substring(linkPaginationElement.length - 3, linkPaginationElement.length - 1)
+                var i = 2
+                Log.d("pageMax", "$pageMax")
+                val verifyPageMax = pageMax.replace("/", "")
+                while (i <= verifyPageMax.toInt()) {
+                    val chapterPageURL = linkTruyen + i + "/"
+                    i++
+                    Log.d("Link Chapter", "$chapterPageURL")
+                    val document2 = Jsoup.connect("${chapterPageURL}").get()
                     tempList2.clear()
                     val chapterElement2 = document2.select("div[id=divtab] ul[class=w3-ul] li ")
                     for (value in chapterElement2) {

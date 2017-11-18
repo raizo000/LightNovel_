@@ -22,7 +22,7 @@ class MainLayout : AnkoComponent<MainActivity> {
         return with(ui) {
             linearLayout {
                 orientation = LinearLayout.VERTICAL
-                //   isFocusableInTouchMode = true
+                isFocusableInTouchMode = true
 
                 lparams(width = matchParent, height = matchParent) {}
 

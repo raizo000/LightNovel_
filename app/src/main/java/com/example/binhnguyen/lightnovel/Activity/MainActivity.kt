@@ -99,7 +99,9 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
+    private fun getDuLieuTrangChu(){
+        val link 
+    }
     private fun getDanhSachTruyenFullHayNhat() {
         doAsync {
             val document = Jsoup.connect("http://webtruyen.com/truyen-full/").get()
