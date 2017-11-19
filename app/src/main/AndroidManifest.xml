@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.chiTietTruyenActivity"></activity>
-        <activity android:name=".Activity.noiDungTruyenActivity"></activity>
-
+        <activity android:name=".Activity.chiTietTruyenActivity" />
+        <activity android:name=".Activity.noiDungTruyenActivity" />
+        <activity android:name=".Activity.timKiemActivity"></activity>
     </application>
 
 </manifest>

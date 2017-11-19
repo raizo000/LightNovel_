@@ -30,6 +30,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                 linearLayout {
                     orientation = LinearLayout.HORIZONTAL
                     editText {
+                        id = R.id.search
                         hint = "Tìm kiếm"
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                             background = ContextCompat.getDrawable(context, R.drawable.shadown)
@@ -44,57 +45,66 @@ class MainLayout : AnkoComponent<MainActivity> {
                         imageResource = R.drawable.ic_reorder_black_24dp
                     }.lparams(width = wrapContent, height = matchParent)
                 }
-
+                //
                 nestedScrollView {
-                    linearLayout {
-                        lparams(width = matchParent, height = matchParent)
-                        orientation = LinearLayout.VERTICAL
-                        textView {
-                            text = "Truyện đề cử  "
-                            textSize = sp(9).toFloat()
-                            typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
-                            padding = dip(2)
-                        }.lparams(width = matchParent) {
-                            leftMargin = dip(5)
-
-                        }
+                    verticalLayout {
                         recyclerView {
-                            id = R.id.recyclTruyenDeCu
-                            isNestedScrollingEnabled = false
-                            layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
-                        }
-                        textView {
-                            text = "Truyện mới cập nhật "
-                            textSize = sp(9).toFloat()
-                            typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
-                            padding = dip(2)
-
-                        }.lparams() {
-                            leftMargin = dip(5)
-                        }
-                        recyclerView {
-                            id = R.id.recyclTruyenCapNhat
-                            isNestedScrollingEnabled = false
-                            layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
-
-                        }
-
-                        textView {
-                            text = "Truyện Full hay nhất "
-                            textSize = sp(9).toFloat()
-                            typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
-                            padding = dip(2)
-
-                        }.lparams() {
-                            leftMargin = dip(5)
-                        }
-                        recyclerView {
-                            id = R.id.recyclTruyenFullHayNhat
-                            isNestedScrollingEnabled = false
+                            id = R.id.timKiemRecycler
                             layoutManager = GridLayoutManager(context, 3)
+                            visibility = View.GONE
+                        }.lparams(width = matchParent, height = matchParent)
+                        linearLayout {
+                            id = R.id.noiDung
+                            lparams(width = matchParent, height = matchParent)
+                            orientation = LinearLayout.VERTICAL
+                            textView {
+                                text = "Truyện đề cử  "
+                                textSize = sp(9).toFloat()
+                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
+                                padding = dip(2)
+                            }.lparams(width = matchParent) {
+                                leftMargin = dip(5)
 
+                            }
+                            recyclerView {
+                                id = R.id.recyclTruyenDeCu
+                                isNestedScrollingEnabled = false
+                                layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+                            }
+                            textView {
+                                text = "Truyện mới cập nhật "
+                                textSize = sp(9).toFloat()
+                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
+                                padding = dip(2)
+
+                            }.lparams() {
+                                leftMargin = dip(5)
+                            }
+                            recyclerView {
+                                id = R.id.recyclTruyenCapNhat
+                                isNestedScrollingEnabled = false
+                                layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+
+                            }
+
+                            textView {
+                                text = "Truyện Full hay nhất "
+                                textSize = sp(9).toFloat()
+                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
+                                padding = dip(2)
+
+                            }.lparams() {
+                                leftMargin = dip(5)
+                            }
+                            recyclerView {
+                                id = R.id.recyclTruyenFullHayNhat
+                                isNestedScrollingEnabled = false
+                                layoutManager = GridLayoutManager(context, 3)
+
+                            }
                         }
                     }
+
                 }
             }
         }

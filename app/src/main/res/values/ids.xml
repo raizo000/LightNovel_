@@ -26,4 +26,7 @@
     <item name="Next" type="id" />
     <item name="PreButton" type="id" />
     <item name="NextButton" type="id" />
+    <item name="search" type="id" />
+    <item name="noiDung" type="id" />
+    <item name="timKiemRecycler" type="id" />
 </resources>

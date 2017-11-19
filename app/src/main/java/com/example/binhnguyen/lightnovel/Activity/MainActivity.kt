@@ -3,6 +3,12 @@ package com.example.binhnguyen.lightnovel.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import com.example.binhnguyen.lightnovel.R
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenDecu
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenFullHayNhat
@@ -15,7 +21,12 @@ import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TextWatcher {
+    var timKiem: EditText? = null
+    var tempList: MutableList<TruyenModel> = mutableListOf()
+
+    var noidung: LinearLayout? = null
+
     var listChapterTruyenDeCu: MutableList<ChapterModel> = mutableListOf()
     var listTruyenDeCu: MutableList<TruyenModel> = mutableListOf()
 
@@ -25,19 +36,28 @@ class MainActivity : AppCompatActivity() {
     var listChapterTruyenCapNhat: MutableList<ChapterModel> = mutableListOf()
     var listTruyenCapNhat: MutableList<TruyenModel> = mutableListOf()
 
+    var listChapterTruyenFull: MutableList<ChapterModel> = mutableListOf()
+    var listTruyenFull: MutableList<TruyenModel> = mutableListOf()
+
     var adapterTruyenDeCu: AdapterTruyenDecu? = null
     var adapterTruyenCapNhat: AdapterTruyenDecu? = null
     var adapterTruyenFullHayNhat: AdapterTruyenFullHayNhat? = null
+    var adapterTimKiem: AdapterTruyenFullHayNhat? = null
 
     var recyclerTruyenDeCu: RecyclerView? = null
     var recyclerTruyenCapNhat: RecyclerView? = null
     var recyclerTruyenFullHayNhat: RecyclerView? = null
+    var recyclerTimKiem: RecyclerView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainLayout().setContentView(this)
         getDanhSachTruyen()
         getDanhSachTruyenCapNhat()
         getDanhSachTruyenFullHayNhat()
+        if (listTruyenFull.size == 0) {
+            getDuLieuTruyenFull()
+        }
+
         recyclerTruyenDeCu = find(R.id.recyclTruyenDeCu)
         adapterTruyenDeCu = AdapterTruyenDecu(this, listTruyenDeCu)
         recyclerTruyenDeCu?.adapter = adapterTruyenDeCu
@@ -47,8 +67,38 @@ class MainActivity : AppCompatActivity() {
         recyclerTruyenCapNhat?.adapter = adapterTruyenCapNhat
 
         recyclerTruyenFullHayNhat = find(R.id.recyclTruyenFullHayNhat)
-        adapterTruyenFullHayNhat = AdapterTruyenFullHayNhat(this, listTruyenFullMoiNhat)
+        adapterTruyenFullHayNhat = AdapterTruyenFullHayNhat(false,this, listTruyenFullMoiNhat)
         recyclerTruyenFullHayNhat?.adapter = adapterTruyenFullHayNhat
+
+        timKiem = find(R.id.search)
+        recyclerTimKiem = find(R.id.timKiemRecycler)
+        noidung = find(R.id.noiDung)
+        timKiem?.addTextChangedListener(this)
+
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        if (p0?.trim()!!.length > 0) {
+            noidung?.visibility = View.GONE
+            recyclerTimKiem?.visibility = View.VISIBLE
+
+            tempList.clear()
+            tempList = listTruyenFull.filter { p0.toString() in it.tenTruyen }.toMutableList()
+            Log.d("List tam","${tempList.size}")
+            adapterTimKiem = AdapterTruyenFullHayNhat(true,this, tempList)
+            recyclerTimKiem?.adapter=adapterTimKiem
+            adapterTimKiem?.notifyDataSetChanged()
+        } else {
+            noidung?.visibility = View.VISIBLE
+            recyclerTimKiem?.visibility = View.GONE
+        }
 
     }
 
@@ -99,9 +149,37 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-    private fun getDuLieuTrangChu(){
-        val link 
+
+    private fun getDuLieuTruyenFull() {
+        val linkPage = "http://webtruyen.com/truyen-full/"
+        doAsync {
+            val document = Jsoup.connect("http://webtruyen.com/truyen-full/").get()
+            val maxPageLink = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a[class=last]").attr("href")
+            val maxPage = maxPageLink.substring(maxPageLink.length - 4, maxPageLink.length - 1).toInt()
+            for (value in 1..maxPage) {
+                getItem("$linkPage$value/")
+            }
+            Log.d("Size truyen full","${listTruyenFull.size}")
+        }
     }
+
+    private fun getItem(link: String) {
+        val document = Jsoup.connect(link).get()
+        val elementList = document.select("div[class=list-update] div[class=w3-row list-content] div[class=w3-col s6 m3 l3 list]")
+        for (item in elementList) {
+
+            val tenTruyen = item.select("div[class=list-caption] h3").text()
+            val tenChap = item.select("div[class=list-caption] p").text()
+            val linkTruyen = item.select("a[class=w3-hover-opacity]").attr("href")
+            val linkHinh = item.select("a[class=w3-hover-opacity] img").attr("src")
+            val linkChap = item.select("a[class=w3-hover-opacity]").attr("href")
+            val chapterModel = ChapterModel(tenChap, linkChap)
+            listChapterTruyenFull.add(chapterModel)
+            val truyenModel = TruyenModel(tenTruyen, linkTruyen, listChapterTruyenFull, linkHinh)
+            listTruyenFull.add(truyenModel)
+        }
+    }
+
     private fun getDanhSachTruyenFullHayNhat() {
         doAsync {
             val document = Jsoup.connect("http://webtruyen.com/truyen-full/").get()

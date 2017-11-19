@@ -18,14 +18,22 @@ import org.jetbrains.anko.find
 /**
  * Created by Binh Nguyen on 10/28/2017.
  */
-class AdapterTruyenFullHayNhat(var context: Context, var listTruyen: MutableList<TruyenModel>) : RecyclerView.Adapter<AdapterTruyenFullHayNhat.HolderTruyenFullHayNhat>() {
+class AdapterTruyenFullHayNhat(var isSearch: Boolean,var context: Context, var listTruyen: MutableList<TruyenModel>) : RecyclerView.Adapter<AdapterTruyenFullHayNhat.HolderTruyenFullHayNhat>() {
 
     override fun onBindViewHolder(holder: HolderTruyenFullHayNhat?, position: Int) {
         holder?.bindingData(context, listTruyen[position],position)
     }
 
     override fun getItemCount(): Int {
-        return listTruyen.size
+        if(isSearch){
+            if(listTruyen.size>18)
+                return  18
+            else
+                return  listTruyen.size
+        } else
+        {
+            return listTruyen.size
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup?, type: Int): HolderTruyenFullHayNhat {
