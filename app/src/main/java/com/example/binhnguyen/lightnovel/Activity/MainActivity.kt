@@ -1,6 +1,7 @@
 package com.example.binhnguyen.lightnovel.Activity
 
 import android.os.Bundle
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
@@ -8,7 +9,10 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
+import com.example.binhnguyen.lightnovel.Fragment.theLoaiFragment
+import com.example.binhnguyen.lightnovel.Model.TheLoai
 import com.example.binhnguyen.lightnovel.R
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenDecu
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenFullHayNhat
@@ -17,6 +21,7 @@ import com.example.binhnguyen.textmanga.Model.ChapterModel
 import com.example.binhnguyen.textmanga.Model.TruyenModel
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
@@ -24,6 +29,7 @@ import org.jsoup.Jsoup
 class MainActivity : AppCompatActivity(), TextWatcher {
     var timKiem: EditText? = null
     var tempList: MutableList<TruyenModel> = mutableListOf()
+
 
     var noidung: LinearLayout? = null
 
@@ -48,6 +54,10 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     var recyclerTruyenCapNhat: RecyclerView? = null
     var recyclerTruyenFullHayNhat: RecyclerView? = null
     var recyclerTimKiem: RecyclerView? = null
+
+    var imgTheLoai: ImageView? = null
+    var isTheLoai: Boolean = false
+    var fragmentTheLoai: theLoaiFragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainLayout().setContentView(this)
@@ -67,13 +77,29 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         recyclerTruyenCapNhat?.adapter = adapterTruyenCapNhat
 
         recyclerTruyenFullHayNhat = find(R.id.recyclTruyenFullHayNhat)
-        adapterTruyenFullHayNhat = AdapterTruyenFullHayNhat(false,this, listTruyenFullMoiNhat)
+        adapterTruyenFullHayNhat = AdapterTruyenFullHayNhat(false, this, listTruyenFullMoiNhat)
         recyclerTruyenFullHayNhat?.adapter = adapterTruyenFullHayNhat
 
         timKiem = find(R.id.search)
         recyclerTimKiem = find(R.id.timKiemRecycler)
         noidung = find(R.id.noiDung)
         timKiem?.addTextChangedListener(this)
+
+        fragmentTheLoai= theLoaiFragment()
+
+        imgTheLoai = find(R.id.theLoai)
+        imgTheLoai?.onClick {
+            if (isTheLoai) {
+                val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.remove(fragmentTheLoai)
+                fragmentTransaction.commit()
+            } else {
+                val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.khungNoiDung, fragmentTheLoai)
+                fragmentTransaction.commit()
+            }
+            isTheLoai = !isTheLoai
+        }
 
     }
 
@@ -91,9 +117,8 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
             tempList.clear()
             tempList = listTruyenFull.filter { p0.toString() in it.tenTruyen }.toMutableList()
-            Log.d("List tam","${tempList.size}")
-            adapterTimKiem = AdapterTruyenFullHayNhat(true,this, tempList)
-            recyclerTimKiem?.adapter=adapterTimKiem
+            adapterTimKiem = AdapterTruyenFullHayNhat(true, this, tempList)
+            recyclerTimKiem?.adapter = adapterTimKiem
             adapterTimKiem?.notifyDataSetChanged()
         } else {
             noidung?.visibility = View.VISIBLE
@@ -101,6 +126,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         }
 
     }
+
 
     private fun getDanhSachTruyen() {
         doAsync {
@@ -159,7 +185,6 @@ class MainActivity : AppCompatActivity(), TextWatcher {
             for (value in 1..maxPage) {
                 getItem("$linkPage$value/")
             }
-            Log.d("Size truyen full","${listTruyenFull.size}")
         }
     }
 

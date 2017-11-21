@@ -29,4 +29,8 @@
     <item name="search" type="id" />
     <item name="noiDung" type="id" />
     <item name="timKiemRecycler" type="id" />
+    <item name="theLoai" type="id" />
+    <item name="khungNoiDung" type="id" />
+    <item name="theLoaiRecycler" type="id" />
+    <item name="tenTheLoai" type="id" />
 </resources>
