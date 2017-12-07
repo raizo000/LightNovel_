@@ -17,9 +17,10 @@ class theLoaiLayout : AnkoComponent<ViewGroup?> {
         return with(ui) {
             frameLayout {
                 lparams(width = matchParent, height = matchParent)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    background = ContextCompat.getDrawable(context, R.color.wheat)
-                }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        background = ContextCompat.getDrawable(context, R.color.wheat)
+                    }
+
                 recyclerView {
                     id = R.id.theLoaiRecycler
                     layoutManager = GridLayoutManager(context, 3)
