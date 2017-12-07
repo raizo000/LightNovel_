@@ -21,67 +21,49 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
     override fun createView(ui: AnkoContext<noiDungTruyenActivity>): View {
         return with(ui) {
             frameLayout {
-                coordinatorLayout {
-                    appBarLayout {
-                        toolbar {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                background = ContextCompat.getDrawable(context, R.color.colorPrimary)
-                            }
+
+                linearLayout {
+                    lparams(width = matchParent, height = matchParent)
+                    nestedScrollView {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            background = ContextCompat.getDrawable(context, R.color.wheat)
+                        }
+                        linearLayout {
+                            orientation = LinearLayout.HORIZONTAL
                             textView {
-                                id = R.id.toolBarText
-                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
-                                textColor = resources.getColor(R.color.white)
-
-                            }.lparams(width = matchParent) {
-                                topMargin = dip(10)
-                            }
-
-                        }
-                    }.lparams(width = matchParent) {
-                    }
-
-                    linearLayout {
-                        lparams(width = matchParent, height = matchParent)
-                        nestedScrollView {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                background = ContextCompat.getDrawable(context, R.color.wheat)
-                            }
-                            linearLayout {
-                                orientation = LinearLayout.HORIZONTAL
-                                textView {
-                                    id = R.id.NoiDungTruyen
-                                    textSize = sp(6).toFloat()
-                                    textColor = resources.getColor(R.color.black)
-                                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
-                                }.lparams(width = matchParent, height = matchParent) {
-                                    padding = dip(10)
-                                    topMargin = dip(50)
-                                }
+                                id = R.id.NoiDungTruyen
+                                textSize = sp(6).toFloat()
+                                textColor = resources.getColor(R.color.black)
+                                typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
+                            }.lparams(width = matchParent, height = matchParent) {
+                                padding = dip(10)
                             }
                         }
                     }
-                    linearLayout {
-                        orientation = LinearLayout.HORIZONTAL
+                }
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
 
-                        backgroundColor=ContextCompat.getColor(context,R.color.transparent)
-                        button {
-                            text="<"
-                            id=R.id.PreButton
-                        }.lparams {
-                            leftMargin=dip(20)
-                        }
-                        textView {
+                    backgroundColor = ContextCompat.getColor(context, R.color.transparent)
+                    button {
+                        text = "<"
+                        id = R.id.PreButton
+                        backgroundColor = ContextCompat.getColor(context,R.color.gray)
+                    }.lparams(width = dip(50), height = matchParent)
+                    textView {
+                        id = R.id.txtTenChap
+                        textColor = ContextCompat.getColor(context,R.color.black)
 
-                        }.lparams(width= matchParent,height = matchParent,weight = 1f)
-                        button {
-                            id=R.id.NextButton
-                            text=">"
-                        }.lparams {
-                            rightMargin=dip(20)
-                        }
-                    }.lparams(width = matchParent, height = dip(50)){
-                        gravity=Gravity.BOTTOM
-                    }
+                        gravity = Gravity.CENTER
+                        backgroundColor = ContextCompat.getColor(context,R.color.gray)
+                    }.lparams(width = wrapContent,height = matchParent,weight = 1f)
+                    button {
+                        id = R.id.NextButton
+                        text = ">"
+                        backgroundColor = ContextCompat.getColor(context,R.color.gray)
+                    }.lparams(width = dip(50), height = matchParent)
+                }.lparams(width = matchParent, height = dip(40)) {
+                    gravity = Gravity.BOTTOM
                 }
             }
         }

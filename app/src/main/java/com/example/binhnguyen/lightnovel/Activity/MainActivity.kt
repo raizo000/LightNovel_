@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         super.onCreate(savedInstanceState)
         MainLayout().setContentView(this)
         getDanhSachTruyen()
-        getDanhSachTruyenCapNhat()
         getDanhSachTruyenFullHayNhat()
         if (listTruyenFull.size == 0) {
             getDuLieuTruyenFull()
@@ -72,9 +71,6 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         adapterTruyenDeCu = AdapterTruyenDecu(this, listTruyenDeCu)
         recyclerTruyenDeCu?.adapter = adapterTruyenDeCu
 
-        recyclerTruyenCapNhat = find(R.id.recyclTruyenCapNhat)
-        adapterTruyenCapNhat = AdapterTruyenDecu(this, listTruyenCapNhat)
-        recyclerTruyenCapNhat?.adapter = adapterTruyenCapNhat
 
         recyclerTruyenFullHayNhat = find(R.id.recyclTruyenFullHayNhat)
         adapterTruyenFullHayNhat = AdapterTruyenFullHayNhat(false, this, listTruyenFullMoiNhat)
@@ -85,7 +81,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         noidung = find(R.id.noiDung)
         timKiem?.addTextChangedListener(this)
 
-        fragmentTheLoai= theLoaiFragment()
+        fragmentTheLoai = theLoaiFragment()
 
         imgTheLoai = find(R.id.theLoai)
         imgTheLoai?.onClick {
@@ -153,28 +149,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         }
     }
 
-    private fun getDanhSachTruyenCapNhat() {
-        doAsync {
-            val document = Jsoup.connect("http://webtruyen.com/").get()
-            val elementList_Decu = document.select(" div[class=list-update]  div[class=w3-row list-content] div[class=w3-col s6 m3 l3 list] ")
-            for (item in elementList_Decu) {
 
-                val tenTruyen = item.select("div[class=list-caption] h3").text()
-                val tenChap = item.select("div[class=list-caption] p").text()
-                val linkTruyen = item.select("a[class=w3-hover-opacity]").attr("href")
-                val linkHinh = item.select("a[class=w3-hover-opacity] img").attr("src")
-                val linkChap = item.select("a[class=w3-hover-opacity]").attr("href")
-                val chapterModel = ChapterModel(tenChap, linkChap)
-                listChapterTruyenCapNhat.add(chapterModel)
-                val truyenModel = TruyenModel(tenTruyen, linkTruyen, listChapterTruyenCapNhat, linkHinh)
-                listTruyenCapNhat.add(truyenModel)
-            }
-            uiThread {
-                adapterTruyenCapNhat?.notifyDataSetChanged()
-            }
-
-        }
-    }
 
     private fun getDuLieuTruyenFull() {
         val linkPage = "http://webtruyen.com/truyen-full/"
@@ -208,14 +183,16 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     private fun getDanhSachTruyenFullHayNhat() {
         doAsync {
             val document = Jsoup.connect("http://webtruyen.com/truyen-full/").get()
-            val elementList_Decu = document.select("div[class=list-update] div[class=w3-row list-content] div[class=w3-col s6 m3 l3 list]")
+            val elementList_Decu = document.select("div[id=main] div[class=list-update] div[class=w3-row list-content]  div[class=w3-row list-row-img]")
+            Log.d("elementList_Decu", "$elementList_Decu")
             for (item in elementList_Decu) {
 
-                val tenTruyen = item.select("div[class=list-caption] h3").text()
-                val tenChap = item.select("div[class=list-caption] p").text()
-                val linkTruyen = item.select("a[class=w3-hover-opacity]").attr("href")
-                val linkHinh = item.select("a[class=w3-hover-opacity] img").attr("src")
-                val linkChap = item.select("a[class=w3-hover-opacity]").attr("href")
+                val tenTruyen = item.select("div[class=w3-col s2 m2 l2 row-image] div  a").attr("title")
+
+                val tenChap = item.select("div[class=w3-col s3 m3 l3 row-number] span[class=row-time]").text()
+                val linkTruyen = item.select("div[class=w3-col s2 m2 l2 row-image] div  a").attr("href")
+                val linkHinh = item.select("div[class=w3-col s2 m2 l2 row-image] img").attr("src")
+                val linkChap = item.select("div[class=w3-col s7 m7 l7 row-info]").attr("href")
                 val chapterModel = ChapterModel(tenChap, linkChap)
                 listChapterTruyenFullHayNhat.add(chapterModel)
                 val truyenModel = TruyenModel(tenTruyen, linkTruyen, listChapterTruyenFullHayNhat, linkHinh)

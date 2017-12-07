@@ -19,7 +19,7 @@ import org.jsoup.Jsoup
 
 class noiDungTruyenActivity : AppCompatActivity(), View.OnClickListener {
     var noiDungTruyen: TextView? = null
-    var toolBarText: TextView? = null
+    var chapterName: TextView? = null
     var prevButton: Button? = null
     var nextButton: Button? = null
     var preChapter: String? = null
@@ -33,7 +33,7 @@ class noiDungTruyenActivity : AppCompatActivity(), View.OnClickListener {
         getNoiDungTruyen(this, linkNoiDungTruyen)
 
         noiDungTruyen = find(R.id.NoiDungTruyen)
-        toolBarText = find(R.id.toolBarText)
+        chapterName = find(R.id.txtTenChap)
         prevButton = find(R.id.PreButton)
         nextButton = find(R.id.NextButton)
 
@@ -69,7 +69,7 @@ class noiDungTruyenActivity : AppCompatActivity(), View.OnClickListener {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     noiDungTruyen?.text = Html.fromHtml(noiDung.html(), 0)
                 }
-                toolBarText?.text = tenChapter
+                chapterName?.text = tenChapter
             }
         }
 

@@ -33,4 +33,5 @@
     <item name="khungNoiDung" type="id" />
     <item name="theLoaiRecycler" type="id" />
     <item name="tenTheLoai" type="id" />
+    <item name="txtTenChap" type="id" />
 </resources>

@@ -78,21 +78,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                                     isNestedScrollingEnabled = false
                                     layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
                                 }
-                                textView {
-                                    text = "Truyện mới cập nhật "
-                                    textSize = sp(9).toFloat()
-                                    typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
-                                    padding = dip(2)
 
-                                }.lparams() {
-                                    leftMargin = dip(5)
-                                }
-                                recyclerView {
-                                    id = R.id.recyclTruyenCapNhat
-                                    isNestedScrollingEnabled = false
-                                    layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
-
-                                }
 
                                 textView {
                                     text = "Truyện Full hay nhất "

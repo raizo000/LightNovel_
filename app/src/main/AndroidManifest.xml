@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".Activity.chiTietTruyenActivity" />
         <activity android:name=".Activity.noiDungTruyenActivity" />
-        <activity android:name=".Activity.timKiemActivity"></activity>
     </application>
 
 </manifest>
