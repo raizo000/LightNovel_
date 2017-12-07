@@ -11,8 +11,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
-import com.example.binhnguyen.lightnovel.Fragment.theLoaiFragment
-import com.example.binhnguyen.lightnovel.Model.TheLoai
+import com.example.binhnguyen.lightnovel.Activity.Fragment.theLoaiFragment
 import com.example.binhnguyen.lightnovel.R
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenDecu
 import com.example.binhnguyen.textmanga.Adapter.AdapterTruyenFullHayNhat

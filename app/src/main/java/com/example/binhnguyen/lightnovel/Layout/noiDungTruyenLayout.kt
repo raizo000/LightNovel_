@@ -33,7 +33,7 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                             textView {
                                 id = R.id.NoiDungTruyen
                                 textSize = sp(6).toFloat()
-                                textColor = resources.getColor(R.color.black)
+                                textColor = ContextCompat.getColor(context,R.color.primaryText)
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                             }.lparams(width = matchParent, height = matchParent) {
                                 padding = dip(10)
@@ -47,20 +47,24 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                     backgroundColor = ContextCompat.getColor(context, R.color.transparent)
                     button {
                         text = "<"
+                        textColor = ContextCompat.getColor(context,R.color.white)
+                        typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                         id = R.id.PreButton
-                        backgroundColor = ContextCompat.getColor(context,R.color.gray)
+                        backgroundColor = ContextCompat.getColor(context,R.color.primaryColor)
                     }.lparams(width = dip(50), height = matchParent)
                     textView {
                         id = R.id.txtTenChap
-                        textColor = ContextCompat.getColor(context,R.color.black)
-
+                        textColor = ContextCompat.getColor(context,R.color.white)
+                        typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                         gravity = Gravity.CENTER
-                        backgroundColor = ContextCompat.getColor(context,R.color.gray)
+                        backgroundColor = ContextCompat.getColor(context,R.color.primaryColor)
                     }.lparams(width = wrapContent,height = matchParent,weight = 1f)
                     button {
                         id = R.id.NextButton
                         text = ">"
-                        backgroundColor = ContextCompat.getColor(context,R.color.gray)
+                        textColor = ContextCompat.getColor(context,R.color.white)
+                        typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
+                        backgroundColor = ContextCompat.getColor(context,R.color.primaryColor)
                     }.lparams(width = dip(50), height = matchParent)
                 }.lparams(width = matchParent, height = dip(40)) {
                     gravity = Gravity.BOTTOM

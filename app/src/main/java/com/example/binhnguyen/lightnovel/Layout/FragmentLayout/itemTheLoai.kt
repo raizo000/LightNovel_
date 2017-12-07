@@ -1,5 +1,6 @@
 package com.example.binhnguyen.lightnovel.Layout.FragmentLayout
 
+import android.graphics.Typeface
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class itemTheLoai : AnkoComponent<ViewGroup?> {
                 }
                 cardView {
                     textView {
+                        typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                         id = R.id.tenTheLoai
                         gravity = Gravity.CENTER
                     }

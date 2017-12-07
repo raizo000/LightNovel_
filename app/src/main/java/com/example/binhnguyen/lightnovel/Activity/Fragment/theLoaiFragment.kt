@@ -1,4 +1,4 @@
-package com.example.binhnguyen.lightnovel.Fragment
+package com.example.binhnguyen.lightnovel.Activity.Fragment
 
 import android.os.Build
 import android.os.Bundle

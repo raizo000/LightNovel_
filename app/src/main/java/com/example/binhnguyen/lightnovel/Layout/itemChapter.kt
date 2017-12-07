@@ -30,7 +30,7 @@ class itemChapter : AnkoComponent<ViewGroup?> {
                 }
                 textView {
                     id = R.id.ngayDang
-                      typeface = Typeface.createFromAsset(context.assets, "Roboto-Light.ttf")
+                      typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                     textSize = dip(4).toFloat()
                     gravity = Gravity.RIGHT
 

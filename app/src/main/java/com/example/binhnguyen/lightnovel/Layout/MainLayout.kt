@@ -81,7 +81,7 @@ class MainLayout : AnkoComponent<MainActivity> {
 
 
                                 textView {
-                                    text = "Truyện Full hay nhất "
+                                    text = "Truyện mới cập nhật "
                                     textSize = sp(9).toFloat()
                                     typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                                     padding = dip(2)
