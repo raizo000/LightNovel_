@@ -34,6 +34,7 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                             }.lparams(width = matchParent, height = matchParent) {
                                 padding = dip(10)
+                                bottomMargin=dip(30)
                             }
                         }
                     }

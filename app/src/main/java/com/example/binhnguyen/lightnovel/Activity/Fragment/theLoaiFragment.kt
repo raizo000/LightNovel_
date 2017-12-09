@@ -54,7 +54,6 @@ class theLoaiFragment : Fragment() {
                 val tenTheLoai = values.text()
                 val theloai = TheLoai(tenTheLoai, linkTheLoai)
                 theLoaiList.add(theloai)
-                Log.d("Ten the loai", "$tenTheLoai")
             }
             uiThread {
                 adapterTheLoai?.notifyDataSetChanged()
