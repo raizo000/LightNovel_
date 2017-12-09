@@ -34,4 +34,5 @@
     <item name="theLoaiRecycler" type="id" />
     <item name="tenTheLoai" type="id" />
     <item name="txtTenChap" type="id" />
+    <item name="recyclerTheLoai" type="id" />
 </resources>

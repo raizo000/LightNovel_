@@ -23,7 +23,7 @@ class ItemTruyenFullHayNhat : AnkoComponent<ViewGroup?> {
                     margin = dip(5)
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    elevation=2f
+                    elevation = 2f
                 }
                 cardView {
                     linearLayout {
@@ -32,16 +32,23 @@ class ItemTruyenFullHayNhat : AnkoComponent<ViewGroup?> {
                             id = R.id.HinhTruyen
                             scaleType = ImageView.ScaleType.FIT_XY
 
-                        }.lparams(width = dip(100), height = dip(150))
+                        }.lparams(width = dip(100), height = dip(150)) {
+                            leftMargin = dip(10)
+                            topMargin = dip(5)
+                        }
                         textView {
                             id = R.id.tenTruyen
                             typeface = Typeface.DEFAULT_BOLD
                             maxLines = 2
                             ellipsize = TextUtils.TruncateAt.END
                         }
+
                         textView {
                             id = R.id.tenChap
+                        }.lparams {
+                            topPadding=dip(5)
                         }
+
                     }
                 }.lparams(width = dip(130), height = dip(225))
             }

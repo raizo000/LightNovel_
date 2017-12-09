@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -183,7 +182,6 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         doAsync {
             val document = Jsoup.connect("http://webtruyen.com/truyen-full/").get()
             val elementList_Decu = document.select("div[id=main] div[class=list-update] div[class=w3-row list-content]  div[class=w3-row list-row-img]")
-            Log.d("elementList_Decu", "$elementList_Decu")
             for (item in elementList_Decu) {
 
                 val tenTruyen = item.select("div[class=w3-col s2 m2 l2 row-image] div  a").attr("title")

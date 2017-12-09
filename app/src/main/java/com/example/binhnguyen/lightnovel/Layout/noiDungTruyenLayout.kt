@@ -9,9 +9,6 @@ import android.widget.LinearLayout
 import com.example.binhnguyen.lightnovel.Activity.noiDungTruyenActivity
 import com.example.binhnguyen.lightnovel.R
 import org.jetbrains.anko.*
-import org.jetbrains.anko.appcompat.v7.toolbar
-import org.jetbrains.anko.design.appBarLayout
-import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.support.v4.nestedScrollView
 
 /**
@@ -32,7 +29,7 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                             orientation = LinearLayout.HORIZONTAL
                             textView {
                                 id = R.id.NoiDungTruyen
-                                textSize = sp(6).toFloat()
+                                textSize = sp(5).toFloat()
                                 textColor = ContextCompat.getColor(context,R.color.primaryText)
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                             }.lparams(width = matchParent, height = matchParent) {

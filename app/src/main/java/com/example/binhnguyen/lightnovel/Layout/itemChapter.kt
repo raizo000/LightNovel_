@@ -1,7 +1,6 @@
 package com.example.binhnguyen.lightnovel.Layout
 
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
