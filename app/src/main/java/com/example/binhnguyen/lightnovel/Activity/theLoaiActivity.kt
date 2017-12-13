@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.GridLayout
 import android.widget.TextView
 import com.example.binhnguyen.lightnovel.Layout.theLoaiLayout
 import com.example.binhnguyen.lightnovel.R
@@ -39,26 +38,27 @@ class theLoaiActivity : AppCompatActivity() {
         recyclerViewTheLoai?.adapter = adapterTheLoai
 
 
-        val scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView?.layoutManager as GridLayoutManager
-                val tongItemDaHienThi = layoutManager.findFirstCompletelyVisibleItemPosition()
-                //   Log.d("Tong item da hien thi", "$tongItemDaHienThi")
-                val tongItem = layoutManager.itemCount
-                Log.d("Tong item ", "$tongItem")
-                //   Log.d("Tong item", "${(tongItemDaHienThi + itemDangHienThi)}")
+        /*     val scrollListener = object : RecyclerView.OnScrollListener() {
+                 override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                     super.onScrolled(recyclerView, dx, dy)
+                     val layoutManager = recyclerView?.layoutManager as GridLayoutManager
+                     val tongItemDaHienThi = layoutManager.findFirstCompletelyVisibleItemPosition()
 
-                if (tongItem == (tongItemDaHienThi + itemDangHienThi)) {
-               //     Log.d("Tong item ", "$maxPage")
-                    if (oldPage <= maxPage) {
-                        getDanhSachTruyen("$linkPage$oldPage" + "/")
-                    }
-
-                }
-            }
-        }
-        recyclerViewTheLoai?.addOnScrollListener(scrollListener)
+                     val tongItem = layoutManager.itemCount
+                     Log.d("Tong item ", "$tongItem")
+                     Log.d("Tong item đã hiển thị", "${(tongItemDaHienThi + itemDangHienThi)}")
+                     if (tongItem == (tongItemDaHienThi + itemDangHienThi)) {
+                         if (oldPage <= maxPage) {
+                             Log.d("Max page", "$maxPage")
+                             getDanhSachTruyen("$linkPage$oldPage" + "/")
+                             oldPage++
+                             Log.d("Old page", "$oldPage")
+                         }
+                     }
+                 }
+             }
+             */
+        //  recyclerViewTheLoai?.addOnScrollListener(scrollListener)
         toolbar(link)
         getDuLieuTruyenFull(link)
     }
@@ -69,9 +69,11 @@ class theLoaiActivity : AppCompatActivity() {
             val document = Jsoup.connect(link).get()
             val maxPageLink = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a[class=last]").attr("title")
             maxPage = maxPageLink.substring(5, maxPageLink.length).toInt()
-            //    for (value in 1..maxPage.toInt()) {
-            getDanhSachTruyen("$linkPage" + "1/")
-            // }
+            for (i in 1..maxPage) {
+                Log.d("Link", "${linkPage + i}")
+                getDanhSachTruyen(linkPage + i + "/")
+            }
+
         }
     }
 
@@ -90,10 +92,8 @@ class theLoaiActivity : AppCompatActivity() {
             val document = Jsoup.connect(link).get()
             val elementListTheLoai = document.select("div[id=main] div[class=list-update] div[class=w3-row list-content]  div[class=w3-row list-row-img]")
             for (item in elementListTheLoai) {
-
                 val tenTruyen = item.select("div[class=w3-col s2 m2 l2 row-image] div  a").attr("title")
-
-                val tenChap = item.select("div[class=w3-col s3 m3 l3 row-number] span[class=row-time]").text()
+                val tenChap = " " //item.select("div[class=w3-col s3 m3 l3 row-number] span[class=row-time]").text()
                 val linkTruyen = item.select("div[class=w3-col s2 m2 l2 row-image] div  a").attr("href")
                 val linkHinh = item.select("div[class=w3-col s2 m2 l2 row-image] img").attr("src")
                 val linkChap = item.select("div[class=w3-col s7 m7 l7 row-info]").attr("href")
@@ -101,12 +101,9 @@ class theLoaiActivity : AppCompatActivity() {
                 listChapter.add(chapterModel)
                 val truyenModel = TruyenModel(tenTruyen, linkTruyen, listChapter, linkHinh)
                 listTruyen.add(truyenModel)
-
             }
             uiThread {
-
                 adapterTheLoai?.notifyDataSetChanged()
-                oldPage++
             }
         }
     }
