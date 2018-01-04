@@ -50,6 +50,13 @@ class chiTietTruyenActivity : AppCompatActivity() {
         chapterRecyclerView?.adapter = adapterChapter
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        finish()
+        startActivity(intent)
+
+    }
+
     private fun getChitietTruyen(linkTruyen: String) {
         val listLink = arrayListOf<String>()
         val tempList2 = mutableListOf<ChapterModel>()
@@ -105,15 +112,14 @@ class chiTietTruyenActivity : AppCompatActivity() {
                     listChapter.addAll(tempList2)
                 }
             }
-            if(!linkPaginationElement.isEmpty()) {
+            if (!linkPaginationElement.isEmpty()) {
                 val pageMax = linkPaginationElement.substring(linkPaginationElement.length - 3, linkPaginationElement.length - 1)
                 var i = 2
-                Log.d("pageMax", "$pageMax")
+
                 val verifyPageMax = pageMax.replace("/", "")
                 while (i <= verifyPageMax.toInt()) {
                     val chapterPageURL = linkTruyen + i + "/"
                     i++
-                    Log.d("Link Chapter", "$chapterPageURL")
                     val document2 = Jsoup.connect("${chapterPageURL}").get()
                     tempList2.clear()
                     val chapterElement2 = document2.select("div[id=divtab] ul[class=w3-ul] li ")

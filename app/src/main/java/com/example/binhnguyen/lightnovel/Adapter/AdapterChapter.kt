@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.binhnguyen.lightnovel.Activity.noiDungTruyenActivity
 import com.example.binhnguyen.lightnovel.Layout.itemChapter
+import com.example.binhnguyen.lightnovel.Model.LinkModel
 import com.example.binhnguyen.lightnovel.R
 import com.example.binhnguyen.textmanga.Model.ChapterModel
+import com.example.jenov.manga.DB.DatabaseHelper
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 
@@ -33,12 +35,28 @@ class AdapterChapter(var context: Context, var listChapter: MutableList<ChapterM
     class HolderChapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindingData(context: Context, chapterModel: ChapterModel) {
             val tencChap = itemView.find<TextView>(R.id.tenChapterChiTiet)
-            val ngayDang=itemView.find<TextView>(R.id.ngayDang)
+            val ngayDang = itemView.find<TextView>(R.id.ngayDang)
             tencChap.text = chapterModel.tenChap
-            ngayDang.text=chapterModel.ngayDang
+            val db = DatabaseHelper(context)
+            val allData: MutableList<LinkModel>
+            var data = LinkModel("", "")
+            allData = db.getParticularMangaData(chapterModel.linkChap)
+            for (values in allData) {
+                data = LinkModel(values.link, "")
+            }
+
+            if (!data.link.isEmpty()) {
+                ngayDang.text = "Đã xem"
+            } else {
+                ngayDang.text = ""
+            }
+
+
+
             itemView.setOnClickListener {
-                val intent=Intent(context,noiDungTruyenActivity::class.java )
-                intent.putExtra("linkNoiDungTruyen",chapterModel.linkChap)
+                db.insertMangatData(chapterModel.linkChap, chapterModel.ngayDang)
+                val intent = Intent(context, noiDungTruyenActivity::class.java)
+                intent.putExtra("linkNoiDungTruyen", chapterModel.linkChap)
                 context.startActivity(intent)
             }
         }

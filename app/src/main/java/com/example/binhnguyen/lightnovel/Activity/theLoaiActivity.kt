@@ -2,7 +2,6 @@ package com.example.binhnguyen.lightnovel.Activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.TextView
@@ -24,9 +23,8 @@ class theLoaiActivity : AppCompatActivity() {
     var recyclerViewTheLoai: RecyclerView? = null
     var toolBarText: TextView? = null
     var maxPage = 1
-    var itemDangHienThi = 8
     var linkPage = ""
-    var oldPage = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         theLoaiLayout().setContentView(this)
@@ -37,28 +35,6 @@ class theLoaiActivity : AppCompatActivity() {
         adapterTheLoai = AdapterTruyenFullHayNhat(false, this, listTruyen)
         recyclerViewTheLoai?.adapter = adapterTheLoai
 
-
-        /*     val scrollListener = object : RecyclerView.OnScrollListener() {
-                 override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                     super.onScrolled(recyclerView, dx, dy)
-                     val layoutManager = recyclerView?.layoutManager as GridLayoutManager
-                     val tongItemDaHienThi = layoutManager.findFirstCompletelyVisibleItemPosition()
-
-                     val tongItem = layoutManager.itemCount
-                     Log.d("Tong item ", "$tongItem")
-                     Log.d("Tong item đã hiển thị", "${(tongItemDaHienThi + itemDangHienThi)}")
-                     if (tongItem == (tongItemDaHienThi + itemDangHienThi)) {
-                         if (oldPage <= maxPage) {
-                             Log.d("Max page", "$maxPage")
-                             getDanhSachTruyen("$linkPage$oldPage" + "/")
-                             oldPage++
-                             Log.d("Old page", "$oldPage")
-                         }
-                     }
-                 }
-             }
-             */
-        //  recyclerViewTheLoai?.addOnScrollListener(scrollListener)
         toolbar(link)
         getDuLieuTruyenFull(link)
     }
@@ -70,7 +46,6 @@ class theLoaiActivity : AppCompatActivity() {
             val maxPageLink = document.select("div[class=w3-center pagination] ul[class=w3-pagination paging] li a[class=last]").attr("title")
             maxPage = maxPageLink.substring(5, maxPageLink.length).toInt()
             for (i in 1..maxPage) {
-                Log.d("Link", "${linkPage + i}")
                 getDanhSachTruyen(linkPage + i + "/")
             }
 

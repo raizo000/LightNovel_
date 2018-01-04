@@ -66,7 +66,7 @@ class MainLayout : AnkoComponent<MainActivity> {
                                 orientation = LinearLayout.VERTICAL
                                 textView {
                                     text = "Truyện đề cử  "
-                                    textSize = sp(9).toFloat()
+                                    textSize = sp(8).toFloat()
                                     typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                                     padding = dip(2)
                                 }.lparams(width = matchParent) {
@@ -82,7 +82,7 @@ class MainLayout : AnkoComponent<MainActivity> {
 
                                 textView {
                                     text = "Truyện mới cập nhật "
-                                    textSize = sp(9).toFloat()
+                                    textSize = sp(8).toFloat()
                                     typeface = Typeface.createFromAsset(context.assets, "Roboto-Bold.ttf")
                                     padding = dip(2)
 

@@ -2,6 +2,8 @@ package com.example.binhnguyen.lightnovel.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -30,9 +32,10 @@ class AdapterTheLoai(val context: Context, val theLoaiList: MutableList<TheLoai>
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
         val view = itemTheLoai().createView(AnkoContext.Companion.create(context, parent, false))
-        return Holder(view);
+        return Holder(view)
     }
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {

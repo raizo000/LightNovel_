@@ -29,10 +29,11 @@ class noiDungTruyenLayout : AnkoComponent<noiDungTruyenActivity> {
                             orientation = LinearLayout.HORIZONTAL
                             textView {
                                 id = R.id.NoiDungTruyen
+                                textSize = sp(5).toFloat()
                                 textColor = ContextCompat.getColor(context,R.color.primaryText)
                                 typeface = Typeface.createFromAsset(context.assets, "Roboto-Regular.ttf")
                             }.lparams(width = matchParent, height = matchParent) {
-                                padding = dip(10)
+                                leftMargin= dip(10)
                                 bottomMargin=dip(30)
                             }
                         }

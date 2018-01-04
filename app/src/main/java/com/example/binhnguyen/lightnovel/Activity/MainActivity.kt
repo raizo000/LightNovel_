@@ -37,19 +37,15 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     var listChapterTruyenFullHayNhat: MutableList<ChapterModel> = mutableListOf()
     var listTruyenFullMoiNhat: MutableList<TruyenModel> = mutableListOf()
 
-    var listChapterTruyenCapNhat: MutableList<ChapterModel> = mutableListOf()
-    var listTruyenCapNhat: MutableList<TruyenModel> = mutableListOf()
 
     var listChapterTruyenFull: MutableList<ChapterModel> = mutableListOf()
     var listTruyenFull: MutableList<TruyenModel> = mutableListOf()
 
     var adapterTruyenDeCu: AdapterTruyenDecu? = null
-    var adapterTruyenCapNhat: AdapterTruyenDecu? = null
     var adapterTruyenFullHayNhat: AdapterTruyenFullHayNhat? = null
     var adapterTimKiem: AdapterTruyenFullHayNhat? = null
 
     var recyclerTruyenDeCu: RecyclerView? = null
-    var recyclerTruyenCapNhat: RecyclerView? = null
     var recyclerTruyenFullHayNhat: RecyclerView? = null
     var recyclerTimKiem: RecyclerView? = null
 
@@ -146,7 +142,6 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
         }
     }
-
 
 
     private fun getDuLieuTruyenFull() {
