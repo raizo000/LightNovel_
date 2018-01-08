@@ -158,14 +158,14 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
     private fun getItem(link: String) {
         val document = Jsoup.connect(link).get()
-        val elementList = document.select("div[class=list-update] div[class=w3-row list-content] div[class=w3-col s6 m3 l3 list]")
+        val elementList = document.select("div[class=list-update] div[class=w3-row list-content] div[class=w3-row list-row-img] ")
         for (item in elementList) {
 
-            val tenTruyen = item.select("div[class=list-caption] h3").text()
-            val tenChap = item.select("div[class=list-caption] p").text()
-            val linkTruyen = item.select("a[class=w3-hover-opacity]").attr("href")
-            val linkHinh = item.select("a[class=w3-hover-opacity] img").attr("src")
-            val linkChap = item.select("a[class=w3-hover-opacity]").attr("href")
+            val tenTruyen = item.select("  div[class=w3-col s7 m7 l7 row-info] h3 a").text()
+            val tenChap = ""
+            val linkTruyen = item.select(" div[class=w3-col s7 m7 l7 row-info] h3 a").attr("href")
+            val linkHinh = item.select("div[class=w3-col s2 m2 l2 row-image]  img").attr("src")
+            val linkChap = item.select("div[class=w3-col s7 m7 l7 row-info] h3 a").attr("href")
             val chapterModel = ChapterModel(tenChap, linkChap)
             listChapterTruyenFull.add(chapterModel)
             val truyenModel = TruyenModel(tenTruyen, linkTruyen, listChapterTruyenFull, linkHinh)
